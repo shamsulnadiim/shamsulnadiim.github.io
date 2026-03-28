@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N M Shamsul Islam Nadiim — Architect</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 4rem 5rem 6rem;
+  position: relative; z-index: 2;
+}
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 0.65rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.6rem;
+  display: flex; align-items: center; gap: 0.9rem;
+  opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
+}
+.hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); flex-shrink: 0; }
+.hero-name {
+  font-family: var(--display);
+  font-size: clamp(3.2rem, 5.5vw, 5.8rem);
+  font-weight: 700; line-height: 0.95;
+  color: var(--text); margin-bottom: 0.2rem;
+  opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+}
+.hero-name span { color: var(--gold); font-style: italic; }
+.hero-name-small {
+  font-family: var(--mono); font-size: 0.7rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 0.6rem; margin-top: 0.3rem;
+  opacity: 0; animation: fadeUp 0.8s ease 0.25s forwards;
+}
+.hero-role {
+  font-family: var(--display); font-size: 1.2rem;
+  font-style: italic; color: var(--text-dim);
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+}
+.hero-desc {
+  font-size: 0.92rem; line-height: 1.85;
+  color: var(--text-dim); max-width: 420px;
+  margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
+}
+.hero-btns {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+}
+.hero-right {
+  position: relative; display: flex;
+  align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.hero-photo-frame {
+  position: relative; width: 420px; height: 540px;
+  opacity: 0; animation: fadeUp 0.9s ease 0.35s forwards;
+}
+.hero-photo-frame::before {
+  content: '';
+  position: absolute; top: -12px; right: -12px;
+  width: 100%; height: 100%;
+  border: 1px solid var(--border);
+  z-index: 0;
+}
+.hero-photo-inner {
+  position: relative; width: 100%; height: 100%;
+  background: var(--surface);
+  border: 1px solid rgba(201,168,76,0.12);
+  overflow: hidden; z-index: 1;
+  display: flex; align-items: flex-end;
+}
+.hero-photo-inner img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block;
+}
+.hero-photo-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1rem;
+}
+.hero-photo-placeholder .initials {
+  font-family: var(--display);
+  font-size: 8rem; font-weight: 700;
+  color: rgba(201,168,76,0.07);
+  line-height: 1;
+}
+.hero-photo-placeholder .ph-note {
+  font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(201,168,76,0.3);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 0.4rem 0.9rem;
+}
+.hero-stats-bar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: rgba(10,10,12,0.92);
+  border-top: 1px solid var(--border); z-index: 3;
+}
+.hero-stat {
+  padding: 1rem 0.8rem; text-align: center;
+  border-right: 1px solid var(--border);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-n {
+  font-family: var(--display); font-size: 1.9rem;
+  font-weight: 600; color: var(--gold); line-height: 1;
+}
+.hero-stat-l {
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-dim); margin-top: 0.25rem;
+}
+.hero-bg-arcs {
+  position: absolute; right: -100px; top: 50%;
+  transform: translateY(-50%); pointer-events: none; z-index: 0;
+}
+.hero-bg-arcs circle { fill: none; stroke: rgba(201,168,76,0.04); }
+
+/* ── FEATURED STRIP ── */
+.featured-strip {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.4rem 6rem;
+  display: flex; align-items: center; gap: 3rem;
+  overflow: hidden;
+}
+.strip-label {
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); flex-shrink: 0; white-space: nowrap;
+}
+.strip-items {
+  display: flex; gap: 3rem; align-items: center;
+  flex-wrap: wrap;
+}
+.strip-item {
+  font-family: var(--mono); font-size: 0.65rem;
+  letter-spacing: 0.08em; color: var(--text-dim);
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.strip-item::before { content: '◆'; font-size: 0.4rem; color: var(--gold); }
+
+/* ── PAGE SECTIONS ── */
+.home-sections { padding: 6rem 6rem; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 6rem; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 6rem; }
+
+/* About preview */
+.about-preview { grid-column: 1 / 3; }
+.ap-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+.ap-photo {
+  aspect-ratio: 3/4;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.ap-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.ap-photo-ph {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0.8rem;
+}
+.ap-photo-ph .big { font-family: var(--display); font-size: 5rem; color: rgba(201,168,76,0.06); }
+.ph-tag {
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(201,168,76,0.25); border: 1px solid rgba(201,168,76,0.12);
+  padding: 0.3rem 0.7rem;
+}
+.ap-text p { font-size: 0.93rem; line-height: 1.9; color: var(--text-dim); margin-bottom: 1.2rem; }
+.info-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.chip {
+  font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.2);
+  color: var(--gold); padding: 0.3rem 0.8rem;
+}
+
+/* Quick-links cards */
+.ql-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 2.2rem;
+  transition: border-color 0.25s, transform 0.25s;
+  text-decoration: none; display: block;
+  position: relative; overflow: hidden;
+}
+.ql-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.ql-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0; transition: opacity 0.25s;
+}
+.ql-card:hover::after { opacity: 1; }
+.ql-num {
+  font-family: var(--display); font-size: 3rem; font-weight: 600;
+  color: rgba(201,168,76,0.12); line-height: 1; margin-bottom: 1rem;
+}
+.ql-title {
+  font-family: var(--display); font-size: 1.3rem; font-weight: 600;
+  color: var(--text); margin-bottom: 0.5rem;
+}
+.ql-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1.2rem; }
+.ql-arrow { color: var(--gold); font-size: 1.1rem; }
+
+/* Featured award */
+.award-feature {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 2.5rem; position: relative; overflow: hidden;
+}
+.award-feature::before {
+  content: '"'; position: absolute; top: -1rem; right: 2rem;
+  font-family: var(--display); font-size: 10rem; font-weight: 700;
+  color: rgba(201,168,76,0.05); line-height: 1;
+}
+.award-badge {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold); font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.35rem 0.9rem; margin-bottom: 1.2rem;
+}
+.award-feature-title {
+  font-family: var(--display); font-size: 1.5rem; font-weight: 600;
+  line-height: 1.3; margin-bottom: 0.8rem; color: var(--text);
+}
+.award-feature-quote {
+  font-family: var(--display); font-style: italic;
+  font-size: 0.95rem; line-height: 1.7; color: var(--text-dim);
+}
+.award-feature-org {
+  font-family: var(--mono); font-size: 0.65rem; color: var(--gold);
+  letter-spacing: 0.1em; margin-top: 1.5rem;
+}
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 5rem 2rem 3rem; }
+  .hero-right { display: none; }
+  .featured-strip { padding: 1.2rem 2rem; }
+  .home-sections { padding: 4rem 2rem; }
+  .two-col, .three-col { grid-template-columns: 1fr; }
+  .about-preview { grid-column: 1; }
+  .ap-inner { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">. nadiim .</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Architect &amp; Heritage Conservationist</p>
+    <h1 class="hero-name">N M<br><span>Shamsul</span><br>Islam Nadim</h1>
+    <p class="hero-name-small">. nadiim .</p>
+    <p class="hero-role">Assistant Architect, Perceive &middot; DUET B.Arch</p>
+    <p class="hero-desc">Architecture has always been about more than just buildings. It reflects the stories communities carry within their walls. My work exists at the crossroads of heritage, sustainability, and storytelling.</p>
+    <div class="hero-btns">
+      <a href="portfolio.html" class="btn-gold">View Portfolio</a>
+      <a href="cv.html" class="btn-outline">Full CV</a>
+      <a href="contact.html" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <svg class="hero-bg-arcs" width="700" height="700" viewBox="0 0 700 700">
+      <circle cx="350" cy="350" r="200"/>
+      <circle cx="350" cy="350" r="300"/>
+      <circle cx="350" cy="350" r="400"/>
+    </svg>
+    <div class="hero-photo-frame">
+      <div class="hero-photo-inner">
+        <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/nadim.jpg" alt="N M Shamsul Islam Nadiim">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED STRIP -->
+<div class="featured-strip">
+  <span class="strip-label">Featured in</span>
+  <div class="strip-items">
+    <span class="strip-item">Claymire &amp; Placemaking Bangladesh</span>
+    <span class="strip-item">4th Intl. Conference on Mosque Architecture, Istanbul</span>
+    <span class="strip-item">IICASD-2024 &mdash; Atlantis Press</span>
+    <span class="strip-item">IIT Roorkee &mdash; Urban Informality Conf.</span>
+    <span class="strip-item">UNESCO-ICOMOS Heritage Volunteering</span>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="home-sections">
+
+  <!-- ABOUT PREVIEW -->
+  <div class="two-col">
+    <div class="about-preview">
+      <p class="section-label">About</p>
+      <h2 class="section-title" style="margin-bottom:2.5rem;">Architect &amp; Writer,<br>Revealing the Unseen</h2>
+      <div class="ap-inner">
+        <div class="ap-photo">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/Patkor.jpg" alt="N M Shamsul Islam Nadiim">
+        </div>
+        <div class="ap-text">
+          <p>Architecture has always been about more than just buildings. I am an architect and writer trained at DUET, with a CGPA of 3.75, ranking first in my batch across nine consecutive semesters.</p>
+          <p>My thesis, <em>"The Golden Fiber Tales,"</em> focused on the adaptive reuse of the historic Adamjee Jute Mill, serving as an act of cultural reclamation and giving voice to a place the city had forgotten.</p>
+          <p>My work exists at the crossroads of heritage, sustainability, and storytelling. A space, like a sentence, must resonate emotionally before it can be comprehended.</p>
+          <div class="info-chips">
+            <span class="chip">Heritage Conservation</span>
+            <span class="chip">Adaptive Reuse</span>
+            <span class="chip">Participatory Design</span>
+            <span class="chip">Earthen Architecture</span>
+            <span class="chip">UNESCO-ICOMOS Volunteer</span>
+          </div>
+          <div style="margin-top:1.8rem;"><a href="about.html" class="btn-outline" style="display:inline-block;">Full Profile</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <div class="three-col">
+    <a href="portfolio.html" class="ql-card">
+      <div class="ql-num">01</div>
+      <div class="ql-title">Portfolio</div>
+      <div class="ql-desc">Academic projects, competition entries, and professional work including the Adamjee Jute Mill thesis, Beyond Bulldozers, and Orange's Call.</div>
+      <div class="ql-arrow">&#8599;</div>
+    </a>
+    <a href="research.html" class="ql-card">
+      <div class="ql-num">02</div>
+      <div class="ql-title">Research</div>
+      <div class="ql-desc">5 publications spanning mosque architecture, industrial heritage, riverine culture, and participatory urban upgrading in informal settlements.</div>
+      <div class="ql-arrow">&#8599;</div>
+    </a>
+    <a href="cv.html" class="ql-card">
+      <div class="ql-num">03</div>
+      <div class="ql-title">CV</div>
+      <div class="ql-desc">Full curriculum vitae including education, experience, awards, certifications, conferences, and volunteering record.</div>
+      <div class="ql-arrow">&#8599;</div>
+    </a>
+  </div>
+
+  <!-- FEATURED AWARD -->
+  <div class="award-feature" style="margin-bottom:6rem;">
+    <div class="award-badge">&#9733; Winner &mdash; Excellence in Community Impact</div>
+    <div class="award-feature-title">Orange's Call: The Shores of Serenity<br><span style="font-weight:300;font-size:1rem;">A Healing Space &mdash; International Design Competition</span></div>
+    <div class="award-feature-quote">"A powerful cultural intervention that reclaims the river as a site of memory, identity, and gathering. By reviving a historic paddle steamer not as a relic but as a living vessel of reflection and community, the project restores a long-lost anchor to Dhaka's riverfront life. The preserved orange hull, echoing gerua, transforms the ship into a beacon of peace and continuity, turning speed into serenity."</div>
+    <div class="award-feature-org">Juror's Comment &mdash; Claymire &amp; Placemaking Bangladesh, 27 Sep 2025</div>
+    <div style="margin-top:1.8rem;"><a href="portfolio.html#competitions" class="btn-outline" style="display:inline-block;">View Project</a></div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">. nadiim .</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="research.html">Research</a>
+    <a href="cv.html">CV</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-note">N M Shamsul Islam Nadiim &mdash; Architect, DUET &mdash; Dhaka, Bangladesh</div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

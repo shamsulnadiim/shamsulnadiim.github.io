@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — N M Shamsul Islam Nadiim</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.about-body { padding: 5rem 6rem; }
+
+/* ── MAIN BIO GRID ── */
+.bio-grid {
+  display: grid; grid-template-columns: 320px 1fr;
+  gap: 5rem; margin-bottom: 5rem; align-items: start;
+}
+.bio-photo-wrap { position: relative; }
+.bio-photo {
+  width: 100%; aspect-ratio: 3/4;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow: hidden; position: relative;
+}
+.bio-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.bio-photo-ph {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1rem;
+}
+.bio-photo-ph .big { font-family: var(--display); font-size: 7rem; color: rgba(201,168,76,0.06); }
+.ph-tag {
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(201,168,76,0.25); border: 1px solid rgba(201,168,76,0.12);
+  padding: 0.3rem 0.7rem;
+}
+/* Photo instruction comment */
+.photo-note {
+  margin-top: 0.8rem; font-family: var(--mono); font-size: 0.6rem;
+  color: rgba(201,168,76,0.2); letter-spacing: 0.08em; line-height: 1.6;
+}
+
+.bio-right {}
+.bio-right p { font-size: 0.95rem; line-height: 1.9; color: var(--text-dim); margin-bottom: 1.2rem; }
+.bio-right p:first-of-type { font-family: var(--display); font-size: 1.2rem; line-height: 1.7; color: var(--text); }
+
+/* ── INFO GRID ── */
+.info-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; border: 1px solid var(--border);
+  margin-bottom: 5rem;
+}
+.info-cell {
+  padding: 1.5rem 1.8rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.info-cell:nth-child(3n) { border-right: none; }
+.info-cell:nth-last-child(-n+3) { border-bottom: none; }
+.info-label {
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.4rem;
+}
+.info-value { font-size: 0.88rem; color: var(--text); }
+.info-value a { color: var(--gold); text-decoration: none; }
+
+/* ── SKILLS ── */
+.skills-section { margin-bottom: 5rem; }
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2.5rem; }
+.skill-group {}
+.skill-group-title { font-family: var(--display); font-size: 1.1rem; font-style: italic; color: var(--text-dim); margin-bottom: 1.4rem; }
+.skill-bar { margin-bottom: 1.3rem; }
+.skill-bar-top { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+.skill-name { font-size: 0.82rem; color: var(--text); }
+.skill-pct { font-family: var(--mono); font-size: 0.65rem; color: var(--gold); }
+.skill-track {
+  height: 1px; background: rgba(255,255,255,0.07); position: relative;
+}
+.skill-fill {
+  position: absolute; left: 0; top: 0; height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 1s cubic-bezier(0.16,1,0.3,1);
+}
+.skill-fill.go { transform: scaleX(1); }
+
+.tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag {
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--border); color: var(--text-dim);
+  transition: border-color 0.2s, color 0.2s;
+}
+.tag:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── PHOTOS GALLERY ── */
+.photos-section { margin-bottom: 5rem; }
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem; margin-top: 2.5rem;
+}
+.gallery-photo {
+  aspect-ratio: 4/3;
+  background: var(--surface); border: 1px solid var(--border);
+  overflow: hidden; position: relative;
+}
+.gallery-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+.gallery-photo:hover img { transform: scale(1.04); }
+.gallery-photo-ph {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0.5rem;
+}
+.gallery-photo-ph span {
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.1);
+  padding: 0.25rem 0.6rem;
+}
+.gallery-label {
+  font-family: var(--mono); font-size: 0.62rem;
+  color: var(--text-dim); text-align: center;
+  padding: 0.6rem 0.4rem; letter-spacing: 0.06em;
+}
+
+/* ── REFERENCES ── */
+.refs-section { margin-bottom: 2rem; }
+.refs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+.ref-card {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1.8rem;
+}
+.ref-name { font-family: var(--display); font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+.ref-role { font-size: 0.8rem; color: var(--gold); margin-bottom: 0.2rem; }
+.ref-org { font-size: 0.8rem; color: var(--text-dim); }
+
+@media (max-width: 960px) {
+  .about-body { padding: 4rem 2rem; }
+  .bio-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .bio-photo { max-width: 280px; }
+  .info-grid { grid-template-columns: 1fr 1fr; }
+  .info-cell:nth-child(3n) { border-right: 1px solid var(--border); }
+  .info-cell:nth-child(2n) { border-right: none; }
+  .skills-grid, .refs-grid, .photos-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">. nadiim .</a>
+  <button class="nav-toggle" id="navToggle">&#9776;</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header" data-title="About">
+  <p class="ph-label">Who I Am</p>
+  <h1 class="ph-title">Architect &amp; <em>Writer</em></h1>
+  <p class="ph-sub">Heritage, Sustainability &amp; Storytelling &mdash; Dhaka, Bangladesh</p>
+</div>
+
+<div class="about-body">
+
+  <!-- BIO -->
+  <div class="bio-grid fade-in">
+    <div class="bio-photo-wrap">
+      <div class="bio-photo">
+        <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/Opekkha.jpg" alt="N M Shamsul Islam Nadiim">
+      </div>
+    </div>
+    <div class="bio-right">
+      <p>Architecture has always been about more than just buildings; it reflects the stories communities carry within their walls. I am an architect and writer, trained at the Dhaka University of Engineering &amp; Technology, where I earned my Bachelor of Architecture with a CGPA of 3.75, ranking first in my batch.</p>
+      <p>My thesis, <em>"The Golden Fiber Tales,"</em> focused on the adaptive reuse of the historic Adamjee Jute Mill, serving as an act of cultural reclamation and giving voice to a place the city had forgotten.</p>
+      <p>My work exists at the crossroads of heritage, sustainability, and storytelling. I have shared insights on mosque architecture in Istanbul, contributed to conservation documentation for UNESCO-ICOMOS at Paharpur, and am currently engaged in a vulture conservation initiative with IUCN, with each experience enhancing my belief that design and writing are fundamentally the same endeavor: revealing the unseen.</p>
+      <p>Honored with the Claymire &amp; Placemaking Bangladesh Excellence Award for <em>Orange's Call: The Shores of Serenity,</em> a project that transformed an abandoned paddle steamer into a vibrant cultural sanctuary along the Buriganga, I approach every undertaking with the same conviction: that a space, like a sentence, must resonate emotionally before it can be comprehended.</p>
+    </div>
+  </div>
+
+  <!-- INFO GRID -->
+  <div class="info-grid fade-in">
+    <div class="info-cell"><div class="info-label">Full Name</div><div class="info-value">N M Shamsul Islam Nadiim</div></div>
+    <div class="info-cell"><div class="info-label">Date of Birth</div><div class="info-value">18 August 1997</div></div>
+    <div class="info-cell"><div class="info-label">Nationality</div><div class="info-value">Bangladeshi</div></div>
+    <div class="info-cell"><div class="info-label">Email</div><div class="info-value"><a href="mailto:shamsulnadiim7@gmail.com">shamsulnadiim7@gmail.com</a></div></div>
+    <div class="info-cell"><div class="info-label">Alt. Email</div><div class="info-value"><a href="mailto:shamsul.works@gmail.com">shamsul.works@gmail.com</a></div></div>
+    <div class="info-cell"><div class="info-label">Phone / WhatsApp</div><div class="info-value">+880 1671792267</div></div>
+    <div class="info-cell"><div class="info-label">Address</div><div class="info-value">980 Post Office Rd, Middle Badda, Dhaka-1212</div></div>
+    <div class="info-cell"><div class="info-label">Current Role</div><div class="info-value">Assistant Architect, Perceive</div></div>
+    <div class="info-cell"><div class="info-label">Instagram</div><div class="info-value"><a href="https://www.instagram.com/shamsulnadiim/" target="_blank">@nadiimized</a></div></div>
+    <div class="info-cell"><div class="info-label">Languages</div><div class="info-value">Bengali (Native), English (C1)</div></div>
+    <div class="info-cell"><div class="info-label">Hobbies</div><div class="info-value">Photography, Travel, Gardening</div></div>
+    <div class="info-cell"><div class="info-label">Availability</div><div class="info-value">Open to Opportunities</div></div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="skills-section fade-in">
+    <p class="section-label">Skills</p>
+    <h2 class="section-title">Expertise</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Software &amp; Technical</div>
+        <div class="skill-bar"><div class="skill-bar-top"><span class="skill-name">AutoCAD / Technical Drawing</span><span class="skill-pct">96%</span></div><div class="skill-track"><div class="skill-fill" style="width:96%"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-top"><span class="skill-name">SketchUp &amp; 3D Modelling</span><span class="skill-pct">92%</span></div><div class="skill-track"><div class="skill-fill" style="width:92%"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-top"><span class="skill-name">Lumion (Animation &amp; Rendering)</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill" style="width:88%"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-top"><span class="skill-name">Adobe Photoshop / Lightroom</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill" style="width:85%"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-top"><span class="skill-name">Rhino &amp; Grasshopper (Parametric)</span><span class="skill-pct">75%</span></div><div class="skill-track"><div class="skill-fill" style="width:75%"></div></div></div>
+        <div class="skill-bar"><div class="skill-bar-top"><span class="skill-name">Revit (BIM)</span><span class="skill-pct">72%</span></div><div class="skill-track"><div class="skill-fill" style="width:72%"></div></div></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Transferable &amp; Design Skills</div>
+        <div class="tag-list">
+          <span class="tag">Heritage Conservation</span>
+          <span class="tag">Adaptive Reuse</span>
+          <span class="tag">Participatory Design</span>
+          <span class="tag">Site Analysis</span>
+          <span class="tag">Earthen Architecture</span>
+          <span class="tag">Architectural Drawing</span>
+          <span class="tag">3D Visualisation</span>
+          <span class="tag">Research &amp; Writing</span>
+          <span class="tag">Community Engagement</span>
+          <span class="tag">Sustainable Design</span>
+          <span class="tag">Project Management</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Historic Architecture</span>
+          <span class="tag">Mock-up Making</span>
+          <span class="tag">Lead Inspections</span>
+          <span class="tag">Photography</span>
+          <span class="tag">Logo Design</span>
+          <span class="tag">BOQ Preparation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTOGRAPHY GALLERY -->
+  <div class="photos-section fade-in">
+    <p class="section-label">Photography</p>
+    <h2 class="section-title" style="margin-bottom:2.5rem;">Through the Lens</h2>
+    <div class="photos-grid">
+      <div>
+        <div class="gallery-photo">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/Mihrab%2C%20Kusumba%20Masjid.jpg" alt="Mihrab, Kusumba Masjid">
+        </div>
+        <div class="gallery-label">Mihrab, Kusumba Masjid</div>
+      </div>
+      <div>
+        <div class="gallery-photo">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/Rose%20Garden.jpg" alt="Rose Garden">
+        </div>
+        <div class="gallery-label">Rose Garden</div>
+      </div>
+      <div>
+        <div class="gallery-photo">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/A%20Glance.jpg" alt="A Glance">
+        </div>
+        <div class="gallery-label">A Glance</div>
+      </div>
+      <div>
+        <div class="gallery-photo">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/In%20Trouble.jpg" alt="In Trouble">
+        </div>
+        <div class="gallery-label">In Trouble</div>
+      </div>
+      <div>
+        <div class="gallery-photo">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/A%20Fuss.jpg" alt="A Fuss">
+        </div>
+        <div class="gallery-label">A Fuss</div>
+      </div>
+      <div>
+        <div class="gallery-photo">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/On%20Trails.jpg" alt="On Trails">
+        </div>
+        <div class="gallery-label">On Trails</div>
+      </div>
+      <div>
+        <div class="gallery-photo">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/Patkor.jpg" alt="Patkor">
+        </div>
+        <div class="gallery-label">Patkor</div>
+      </div>
+      <div>
+        <div class="gallery-photo">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/Skeleton.jpg" alt="Skeleton">
+        </div>
+        <div class="gallery-label">Skeleton</div>
+      </div>
+      <div>
+        <div class="gallery-photo">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/Opekkha.jpg" alt="Opekkha">
+        </div>
+        <div class="gallery-label">Opekkha</div>
+      </div>
+    </div>
+    <div style="margin-top:1.5rem;text-align:center;">
+      <a href="https://www.instagram.com/shamsulnadiim/" target="_blank" class="btn-outline">View on Instagram @nadiimized</a>
+    </div>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="refs-section fade-in">
+    <p class="section-label">References</p>
+    <h2 class="section-title" style="margin-bottom:2.5rem;">Professional References</h2>
+    <div class="refs-grid">
+      <div class="ref-card">
+        <div class="ref-name">Dr. Bayezid Ismail Chowdhury</div>
+        <div class="ref-role">Head, Department of Architecture</div>
+        <div class="ref-org">Dhaka University of Engineering &amp; Technology (DUET)</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Ar. Joarder Hafiz Ullah</div>
+        <div class="ref-role">Assistant Professor, Dept. of Architecture</div>
+        <div class="ref-org">Dhaka University of Engineering &amp; Technology (DUET)</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Ar. Fatiha Polin</div>
+        <div class="ref-role">CEO &amp; Founder</div>
+        <div class="ref-org">Perceive</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">. nadiim .</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="portfolio.html">Portfolio</a>
+    <a href="research.html">Research</a><a href="cv.html">CV</a><a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-note">N M Shamsul Islam Nadiim &mdash; Architect, DUET &mdash; Dhaka, Bangladesh</div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+// Animate skill bars on scroll
+const fills = document.querySelectorAll('.skill-fill');
+const sObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('go'); sObs.unobserve(e.target); } });
+}, { threshold: 0.3 });
+fills.forEach(f => sObs.observe(f));
+</script>
+</body>
+</html>

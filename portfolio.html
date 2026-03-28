@@ -18,15 +18,14 @@
 .tab-panel.active { display:block; }
 
 /* PROJECT CARD */
-.proj-card { background:var(--surface); border:1px solid var(--border); margin-bottom:2.5rem; transition:border-color 0.25s; }
+.proj-card { background:var(--surface); border:1px solid var(--border); margin-bottom:2.5rem; transition:border-color 0.25s; display:grid; grid-template-columns:1fr 1fr; align-items:start; }
 .proj-card:hover { border-color:rgba(201,168,76,0.4); }
-.proj-card.featured { display:grid; grid-template-columns:1fr 1fr; }
-.proj-card.normal { display:grid; grid-template-columns:1fr 1fr; }
 
 /* ── PHOTO FRAME 20×10 — academic slideshows only ── */
 .frame-wrap {
   width: 100%;
   aspect-ratio: 20 / 10;
+  align-self: start;
   position: relative;
   background: #2a1f0e;
   box-sizing: border-box;
@@ -136,7 +135,7 @@
   <div class="tab-panel active" id="panel-academic">
 
     <!-- Adamjee — 4 slides -->
-    <div class="proj-card featured fade-in">
+    <div class="proj-card fade-in">
       <div class="frame-wrap">
         <div class="frame-inner">
           <div class="slideshow" id="ss-ajm">
@@ -166,7 +165,7 @@
     </div>
 
     <!-- Beyond Bulldozers — 3 slides -->
-    <div class="proj-card normal fade-in">
+    <div class="proj-card fade-in">
       <div class="frame-wrap">
         <div class="frame-inner">
           <div class="slideshow" id="ss-bb">
@@ -194,7 +193,7 @@
     </div>
 
     <!-- Threads of the City — 2 slides -->
-    <div class="proj-card normal fade-in">
+    <div class="proj-card fade-in">
       <div class="frame-wrap">
         <div class="frame-inner">
           <div class="slideshow" id="ss-tc">
@@ -221,7 +220,7 @@
     </div>
 
     <!-- Mixed Use Highrise — 2 slides -->
-    <div class="proj-card normal fade-in">
+    <div class="proj-card fade-in">
       <div class="frame-wrap">
         <div class="frame-inner">
           <div class="slideshow" id="ss-hr">
@@ -248,7 +247,7 @@
     </div>
 
     <!-- Secondary School — 1 slide -->
-    <div class="proj-card normal fade-in">
+    <div class="proj-card fade-in">
       <div class="frame-wrap">
         <div class="frame-inner">
           <div class="slideshow" id="ss-ss">

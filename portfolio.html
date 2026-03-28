@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — N M Shamsul Islam Nadiim</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.port-body { padding: 5rem 6rem; }
+
+/* Tabs */
+.port-tabs {
+  display: flex; gap: 0; margin-bottom: 4rem;
+  border-bottom: 1px solid var(--border);
+}
+.port-tab {
+  padding: 0.85rem 1.8rem;
+  font-family: var(--mono); font-size: 0.65rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-dim); cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px; transition: color 0.2s, border-color 0.2s;
+  background: none; border-top: none; border-left: none; border-right: none;
+}
+.port-tab:hover { color: var(--gold); }
+.port-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* Tab panels */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── PROJECT CARDS ── */
+.projects-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem;
+  margin-bottom: 4rem;
+}
+.proj-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow: hidden; transition: border-color 0.25s, transform 0.25s;
+}
+.proj-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-4px); }
+.proj-card.featured { grid-column: 1 / 3; display: grid; grid-template-columns: 1fr 1fr; }
+.proj-img {
+  aspect-ratio: 16/9;
+  background: var(--bg3); overflow: hidden; position: relative;
+}
+.proj-card.featured .proj-img { aspect-ratio: auto; min-height: 320px; }
+.proj-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+.proj-card:hover .proj-img img { transform: scale(1.04); }
+.proj-img-ph {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0.8rem;
+}
+.proj-img-ph .ph-title { font-family: var(--display); font-size: 3rem; color: rgba(201,168,76,0.06); }
+.proj-img-ph span {
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.1);
+  padding: 0.25rem 0.6rem;
+}
+.proj-info { padding: 2rem; display: flex; flex-direction: column; }
+.proj-cat {
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem;
+}
+.proj-title { font-family: var(--display); font-size: 1.4rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; line-height: 1.2; }
+.proj-sub { font-family: var(--display); font-style: italic; font-size: 0.9rem; color: var(--text-dim); margin-bottom: 1rem; }
+.proj-desc { font-size: 0.85rem; line-height: 1.75; color: var(--text-dim); flex-grow: 1; margin-bottom: 1.2rem; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.proj-tag {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em;
+  background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.15);
+  color: var(--gold); padding: 0.2rem 0.6rem;
+}
+
+/* Competition cards */
+.comp-grid {
+  display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 4rem;
+}
+.comp-card {
+  background: var(--surface); border: 1px solid var(--border);
+  display: grid; grid-template-columns: 280px 1fr;
+  overflow: hidden; transition: border-color 0.25s;
+}
+.comp-card:hover { border-color: rgba(201,168,76,0.4); }
+.comp-img {
+  background: var(--bg3); position: relative; overflow: hidden;
+}
+.comp-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.comp-img-ph {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.comp-img-ph span {
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.1);
+  padding: 0.25rem 0.6rem;
+}
+.comp-info { padding: 2.5rem; }
+.comp-badge {
+  display: inline-block; margin-bottom: 1rem;
+  background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold); font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.9rem;
+}
+.comp-badge.silver { background: rgba(180,180,180,0.08); border-color: rgba(180,180,180,0.2); color: #b4b4b4; }
+.comp-badge.blue { background: rgba(100,150,220,0.08); border-color: rgba(100,150,220,0.2); color: #7ab0e8; }
+.comp-title { font-family: var(--display); font-size: 1.5rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+.comp-org { font-family: var(--mono); font-size: 0.65rem; color: var(--gold); letter-spacing: 0.08em; margin-bottom: 1rem; }
+.comp-quote { font-family: var(--display); font-style: italic; font-size: 0.92rem; line-height: 1.7; color: var(--text-dim); border-left: 2px solid var(--border); padding-left: 1.2rem; margin-bottom: 1rem; }
+.comp-team { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); }
+
+/* Logos section */
+.logos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.logo-card {
+  background: var(--surface); border: 1px solid var(--border);
+  aspect-ratio: 4/3; position: relative; overflow: hidden;
+  transition: border-color 0.25s;
+}
+.logo-card:hover { border-color: rgba(201,168,76,0.4); }
+.logo-card img { width: 100%; height: 100%; object-fit: contain; padding: 1.5rem; display: block; }
+.logo-card-ph {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0.6rem;
+}
+.logo-card-ph span {
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(201,168,76,0.2); text-align: center; padding: 0 1rem;
+}
+.logo-label { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); text-align: center; padding: 0.6rem; }
+
+@media (max-width: 960px) {
+  .port-body { padding: 4rem 2rem; }
+  .projects-grid, .logos-grid { grid-template-columns: 1fr; }
+  .proj-card.featured { grid-column: 1; grid-template-columns: 1fr; }
+  .comp-card { grid-template-columns: 1fr; }
+  .comp-img { min-height: 200px; }
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">. nadiim .</a>
+  <button class="nav-toggle" id="navToggle">&#9776;</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header" data-title="Portfolio">
+  <p class="ph-label">Work</p>
+  <h1 class="ph-title"><em>Portfolio</em></h1>
+  <p class="ph-sub">Academic Projects &middot; Competitions &middot; Creative Work</p>
+</div>
+
+<div class="port-body">
+
+  <!-- TABS -->
+  <div class="port-tabs">
+    <button class="port-tab active" data-tab="academic">Academic Projects</button>
+    <button class="port-tab" data-tab="competitions" id="tab-competitions">Competitions</button>
+    <button class="port-tab" data-tab="logos">Creative &amp; Logos</button>
+  </div>
+
+  <!-- ACADEMIC PROJECTS -->
+  <div class="tab-panel active" id="panel-academic">
+    <div class="projects-grid">
+
+      <!-- FEATURED: Adamjee -->
+      <div class="proj-card featured fade-in">
+        <div class="proj-img">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/Mihrab%2C%20Kusumba%20Masjid.jpg" alt="Adamjee Jute Mill — The Golden Fiber Tale">
+        </div>
+        <div class="proj-info">
+          <div class="proj-cat">Thesis Project &mdash; B.Arch DUET</div>
+          <div class="proj-title">The Golden Fiber Tale</div>
+          <div class="proj-sub">Embracing the Legacy of Jute from the Heritage of Adamjee Jute Mill</div>
+          <div class="proj-desc">There is a silence of abandoned places, but it is not the silence of empty spaces, it is the silence of memory. The Adamjee Jute Mill was, for decades, the largest jute mill in the world. This adaptive reuse project transforms the 22-acre site into a machine museum, maker spaces, community gardens, and a riverfront promenade along Shitalakkhya River, giving voice to a place the city had forgotten.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Adaptive Reuse</span>
+            <span class="proj-tag">Industrial Heritage</span>
+            <span class="proj-tag">Narayanganj</span>
+            <span class="proj-tag">Cultural Conservation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beyond Bulldozers -->
+      <div class="proj-card fade-in">
+        <div class="proj-img">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/A%20Glance.jpg" alt="Beyond Bulldozers">
+        </div>
+        <div class="proj-info">
+          <div class="proj-cat">Academic Project</div>
+          <div class="proj-title">Beyond Bulldozers</div>
+          <div class="proj-sub">Scrap Steel, Participatory Design &amp; In-Situ Upgrading in an Informal Dhaka Settlement</div>
+          <div class="proj-desc">Tejgaon Kunipara, 65,787 residents across 5.5 hectares. Over 200 family interviews, four design prototypes using scrap steel from nearby rolling mills. Material costs reduced 40-60%. No one was displaced. Published at IIT Roorkee, 2026.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Participatory Design</span>
+            <span class="proj-tag">Informal Settlement</span>
+            <span class="proj-tag">Scrap Steel</span>
+            <span class="proj-tag">SDG 11</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Threads of the City -->
+      <div class="proj-card fade-in">
+        <div class="proj-img">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/On%20Trails.jpg" alt="Threads of the City">
+        </div>
+        <div class="proj-info">
+          <div class="proj-cat">Urban Studio Project</div>
+          <div class="proj-title">Threads of the City</div>
+          <div class="proj-sub">Weaving People, Paths and Places at Kuril</div>
+          <div class="proj-desc">Exhibited at the IAB Seminar on Environmental Sustainability for Livable Cities: The Dhaka Context. An urban studio project exploring how informal pathways, social routines, and spatial memory can be woven into a framework for livable urban regeneration at Kuril.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Urban Design</span>
+            <span class="proj-tag">IAB Exhibition</span>
+            <span class="proj-tag">Dhaka</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gazipur Agri University -->
+      <div class="proj-card fade-in">
+        <div class="proj-img">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/Skeleton.jpg" alt="Gazipur Agriculture University Master Model">
+        </div>
+        <div class="proj-info">
+          <div class="proj-cat">Professional Project &mdash; SHELTECH Consultants</div>
+          <div class="proj-title">Master Model, Gazipur Agriculture University</div>
+          <div class="proj-sub">Future Extension &mdash; June to July 2024</div>
+          <div class="proj-desc">In alliance with SHELTECH Consultants Private Limited, this project involved developing the master model for the future extension of Gazipur Agriculture University (formerly Bangabandhu Sheikh Mujibur Rahman Agriculture University, renamed after the July 2024 Revolution).</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Master Planning</span>
+            <span class="proj-tag">SHELTECH</span>
+            <span class="proj-tag">Institutional</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPETITIONS -->
+  <div class="tab-panel" id="panel-competitions">
+    <div class="comp-grid">
+
+      <!-- Orange's Call - WINNER -->
+      <div class="comp-card fade-in">
+        <div class="comp-img">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/Rose%20Garden.jpg" alt="Orange's Call: The Shores of Serenity">
+        </div>
+        <div class="comp-info">
+          <span class="comp-badge">&#9733; Winner &mdash; Excellence in Community Impact</span>
+          <div class="comp-title">Orange's Call: The Shores of Serenity</div>
+          <div class="comp-org">A Healing Space &mdash; Claymire &amp; Placemaking Bangladesh &mdash; 27 Sep 2025</div>
+          <div class="comp-quote">"A powerful cultural intervention that reclaims the river as a site of memory, identity, and gathering. By reviving a historic paddle steamer not as a relic but as a living vessel of reflection and community, the project restores a long-lost anchor to Dhaka's riverfront life."</div>
+          <div class="comp-team">Team: N M Shamsul Islam &middot; Tanvir Ahamed &middot; Omar Faruk &middot; Sadika Alam Sayma</div>
+        </div>
+      </div>
+
+      <!-- A Living Canopy - Semi Finalist -->
+      <div class="comp-card fade-in">
+        <div class="comp-img">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/Patkor.jpg" alt="A Living Canopy">
+        </div>
+        <div class="comp-info">
+          <span class="comp-badge silver">Semi Finalist</span>
+          <div class="comp-title">A Living Canopy</div>
+          <div class="comp-org">Senegal Secondary School Competition &mdash; Archstorming &mdash; Feb 2026</div>
+          <div class="comp-quote">A culturally-responsive, living architectural system for a secondary school in Djilakh, Senegal. Guided by Leopold Sedar Senghor's belief that culture, education, and development are inseparable. Using bamboo, mud floor, and thatch roofs anchored to existing trees as generators of spatial order.</div>
+          <div class="comp-team">Team: N M Shamsul Islam &middot; Tanvir Ahamed &middot; Jerin Tasnim Saba &middot; Sadika Alam Sayma</div>
+        </div>
+      </div>
+
+      <!-- Regenerating Island -->
+      <div class="comp-card fade-in">
+        <div class="comp-img">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/In%20Trouble.jpg" alt="Regenerating Island">
+        </div>
+        <div class="comp-info">
+          <span class="comp-badge blue">Participant</span>
+          <div class="comp-title">Regenerating Island</div>
+          <div class="comp-org">Catalysts of Resilience &mdash; International Union of Architects (UIA) &mdash; 11 Aug 2025</div>
+          <div class="comp-quote">A century later, Saint Martin's Island has evolved into a floating resilient ecosystem, where architecture, technology, and coral life coexist. Bamboo-steel watchtowers link through cable cars, guiding visitors across bioluminescent reefs and mangrove gardens. Floating habitats generate energy from tides and sun, achieving net-zero systems.</div>
+          <div class="comp-team">Team: N M Shamsul Islam &middot; Basudev Sarker</div>
+        </div>
+      </div>
+
+      <!-- Eternal Voices -->
+      <div class="comp-card fade-in">
+        <div class="comp-img">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/A%20Fuss.jpg" alt="Eternal Voices">
+        </div>
+        <div class="comp-info">
+          <span class="comp-badge silver">Participant</span>
+          <div class="comp-title">Eternal Voices</div>
+          <div class="comp-org">National Monument Design Competition &mdash; ArchDune &mdash; 23 Nov 2024</div>
+          <div class="comp-quote">Commemorating the July 2024 Revolution (Student-People's Uprising) in Bangladesh. A monument that gives permanent, physical form to collective memory and the spirit of civic resistance.</div>
+          <div class="comp-team">Individual Entry</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LOGOS & CREATIVE -->
+  <div class="tab-panel" id="panel-logos">
+    <p style="font-size:0.9rem;color:var(--text-dim);line-height:1.7;max-width:600px;margin-bottom:3rem;">Graphic and logo design work alongside architectural practice. These pieces demonstrate typographic sensibility, brand identity thinking, and visual communication across different contexts.</p>
+    <div class="logos-grid">
+      <div>
+        <div class="logo-card">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/ArcAAD.png" alt="ArcAAD Logo">
+        </div>
+        <div class="logo-label">ArcAAD &mdash; Architecture Alumni Association of DUET<br>3rd Place, Dept. Competition</div>
+      </div>
+      <div>
+        <div class="logo-card">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/DUETian.com.png" alt="DUETian.com Logo">
+        </div>
+        <div class="logo-label">DUETian.com Alumni Website</div>
+      </div>
+      <div>
+        <div class="logo-card">
+          <img src="https://raw.githubusercontent.com/shamsulnadiim/shamsulnadiim.github.io/refs/heads/main/image/MR15%202.png" alt="Mushfiqur Rahim MR15 Logo">
+        </div>
+        <div class="logo-label">Logo for Mushfiqur Rahim &mdash; MR15</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">. nadiim .</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="portfolio.html">Portfolio</a>
+    <a href="research.html">Research</a><a href="cv.html">CV</a><a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-note">N M Shamsul Islam Nadiim &mdash; Architect, DUET &mdash; Dhaka, Bangladesh</div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+// Tabs
+document.querySelectorAll('.port-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.port-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+  });
+});
+// Hash routing
+if (window.location.hash === '#competitions') {
+  document.querySelector('[data-tab="competitions"]').click();
+}
+</script>
+</body>
+</html>

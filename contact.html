@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — N M Shamsul Islam Nadiim</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.cont-body { padding: 5rem 6rem; }
+.cont-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-bottom: 5rem; }
+
+.cont-lead {
+  font-family: var(--display); font-size: 2.4rem;
+  font-weight: 600; line-height: 1.2; color: var(--text);
+  margin-bottom: 1.5rem;
+}
+.cont-lead em { color: var(--gold); }
+.cont-desc { font-size: 0.92rem; line-height: 1.8; color: var(--text-dim); margin-bottom: 2.5rem; }
+
+.cont-items { display: flex; flex-direction: column; gap: 0; }
+.cont-item {
+  display: grid; grid-template-columns: 48px 1fr;
+  gap: 1.2rem; align-items: start;
+  padding: 1.4rem 0; border-bottom: 1px solid var(--border2);
+}
+.cont-icon {
+  width: 40px; height: 40px; flex-shrink: 0;
+  background: var(--gold-dim); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 1rem;
+}
+.cont-lbl {
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.25rem;
+}
+.cont-val { font-size: 0.88rem; color: var(--text); }
+.cont-val a { color: var(--text); text-decoration: none; transition: color 0.2s; }
+.cont-val a:hover { color: var(--gold); }
+
+/* Social */
+.social-row { display: flex; gap: 0.8rem; margin-top: 2rem; }
+.social-btn {
+  height: 44px; padding: 0 1.4rem;
+  border: 1px solid var(--border); color: var(--text-dim);
+  font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Form */
+.cont-form { display: flex; flex-direction: column; gap: 1.2rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-label {
+  font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);
+}
+.form-input, .form-textarea {
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--body); font-size: 0.9rem;
+  padding: 0.85rem 1rem; outline: none;
+  transition: border-color 0.2s;
+  font-weight: 300;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+.form-textarea { resize: vertical; min-height: 130px; }
+.form-note {
+  font-family: var(--mono); font-size: 0.62rem; color: var(--text-dimmer);
+  letter-spacing: 0.06em; text-align: center; margin-top: 0.4rem;
+}
+
+/* Map visual */
+.location-card {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 2.5rem; display: flex; flex-direction: column; gap: 1rem;
+  margin-bottom: 2rem;
+}
+.loc-map-placeholder {
+  height: 180px; background: var(--bg3);
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+}
+.loc-map-placeholder span {
+  font-family: var(--mono); font-size: 0.62rem;
+  color: var(--text-dimmer); letter-spacing: 0.1em;
+}
+
+@media (max-width: 960px) {
+  .cont-body { padding: 4rem 2rem; }
+  .cont-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">. nadiim .</a>
+  <button class="nav-toggle" id="navToggle">&#9776;</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header" data-title="Contact">
+  <p class="ph-label">Get in Touch</p>
+  <h1 class="ph-title">Let's <em>Connect</em></h1>
+  <p class="ph-sub">Open to collaboration, research, conservation, and design opportunities</p>
+</div>
+
+<div class="cont-body">
+  <div class="cont-grid">
+
+    <!-- LEFT -->
+    <div>
+      <div class="cont-lead fade-in">
+        Interested in <em>heritage,</em><br>
+        <em>sustainable design,</em><br>
+        or research collaboration?
+      </div>
+      <p class="cont-desc fade-in">Whether you are working on conservation projects, academic research, architectural design, or community engagement in Bangladesh or beyond, I would love to hear from you.</p>
+
+      <div class="cont-items fade-in">
+        <div class="cont-item">
+          <div class="cont-icon">&#9993;</div>
+          <div><div class="cont-lbl">Email</div><div class="cont-val"><a href="mailto:shamsulnadiim7@gmail.com">shamsulnadiim7@gmail.com</a></div></div>
+        </div>
+        <div class="cont-item">
+          <div class="cont-icon">&#9993;</div>
+          <div><div class="cont-lbl">Work Email</div><div class="cont-val"><a href="mailto:shamsul.works@gmail.com">shamsul.works@gmail.com</a></div></div>
+        </div>
+        <div class="cont-item">
+          <div class="cont-icon">&#9990;</div>
+          <div><div class="cont-lbl">Phone &amp; WhatsApp</div><div class="cont-val"><a href="https://wa.me/8801671792267">+880 1671792267</a></div></div>
+        </div>
+        <div class="cont-item">
+          <div class="cont-icon">&#8982;</div>
+          <div><div class="cont-lbl">Office</div><div class="cont-val">Perceive, Dhaka, Bangladesh</div></div>
+        </div>
+        <div class="cont-item">
+          <div class="cont-icon">&#9679;</div>
+          <div><div class="cont-lbl">Address</div><div class="cont-val">980 Post Office Road, Middle Badda, Dhaka-1212, Bangladesh</div></div>
+        </div>
+      </div>
+
+      <div class="social-row fade-in">
+        <a href="https://www.instagram.com/shamsulnadiim/" target="_blank" class="social-btn">
+          &#9679; Instagram @nadiimized
+        </a>
+        <a href="https://www.facebook.com/nadiimized/" target="_blank" class="social-btn">
+          f Facebook
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT: form -->
+    <div class="fade-in">
+      <p class="section-label">Send a Message</p>
+      <h3 style="font-family:var(--display);font-size:1.5rem;font-weight:600;margin-bottom:2rem;color:var(--text);">Direct Message</h3>
+      <div class="cont-form">
+        <div class="form-group">
+          <label class="form-label" for="f-name">Your Name</label>
+          <input class="form-input" type="text" id="f-name" placeholder="Farhan Ahmed">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-email">Email Address</label>
+          <input class="form-input" type="email" id="f-email" placeholder="yourname@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-subject">Subject</label>
+          <input class="form-input" type="text" id="f-subject" placeholder="Research Collaboration / Project Inquiry">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-msg">Message</label>
+          <textarea class="form-textarea" id="f-msg" placeholder="Hello Shamsul, I came across your work on..."></textarea>
+        </div>
+        <button class="btn-gold" onclick="handleFormSubmit()" style="align-self:flex-start;cursor:pointer;">Send Message</button>
+        <div class="form-note">Note: This form opens your email client. Alternatively, email directly at shamsulnadiim7@gmail.com</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">. nadiim .</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="portfolio.html">Portfolio</a>
+    <a href="research.html">Research</a><a href="cv.html">CV</a><a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-note">N M Shamsul Islam Nadiim &mdash; Architect, DUET &mdash; Dhaka, Bangladesh</div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+function handleFormSubmit() {
+  const name    = document.getElementById('f-name').value || '';
+  const subject = document.getElementById('f-subject').value || 'Portfolio Inquiry';
+  const msg     = document.getElementById('f-msg').value || '';
+  const body    = encodeURIComponent('From: ' + name + '\n\n' + msg);
+  window.location.href = 'mailto:shamsulnadiim7@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
+}
+</script>
+</body>
+</html>

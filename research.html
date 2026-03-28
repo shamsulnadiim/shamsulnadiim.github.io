@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — N M Shamsul Islam Nadiim</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.res-body { padding: 5rem 6rem; }
+
+/* Stats bar */
+.res-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; border: 1px solid var(--border);
+  margin-bottom: 5rem;
+}
+.res-stat {
+  padding: 2rem 1.5rem; border-right: 1px solid var(--border); text-align: center;
+}
+.res-stat:last-child { border-right: none; }
+.res-stat-n { font-family: var(--display); font-size: 3.5rem; font-weight: 600; color: var(--gold); line-height: 1; }
+.res-stat-l { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-top: 0.4rem; }
+
+/* Publication cards */
+.pub-list { margin-bottom: 5rem; }
+.pub-card {
+  display: grid; grid-template-columns: 80px 1fr auto;
+  gap: 2rem; align-items: start;
+  padding: 2.5rem 2.5rem;
+  background: var(--surface); border: 1px solid var(--border);
+  margin-bottom: 1.2rem; transition: border-color 0.25s;
+}
+.pub-card:hover { border-color: rgba(201,168,76,0.35); }
+.pub-year { font-family: var(--display); font-size: 2.8rem; font-weight: 600; color: rgba(201,168,76,0.18); line-height: 1; text-align: right; }
+.pub-body {}
+.pub-status {
+  display: inline-block; margin-bottom: 0.6rem;
+  font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.2rem 0.7rem; border: 1px solid;
+}
+.pub-status.published { color: #7ab07a; border-color: rgba(122,176,122,0.3); background: rgba(122,176,122,0.06); }
+.pub-status.review { color: var(--gold); border-color: rgba(201,168,76,0.3); background: var(--gold-dim); }
+.pub-title { font-family: var(--display); font-size: 1.15rem; font-weight: 600; line-height: 1.35; color: var(--text); margin-bottom: 0.5rem; }
+.pub-authors { font-size: 0.8rem; color: var(--gold); margin-bottom: 0.4rem; font-family: var(--mono); letter-spacing: 0.04em; }
+.pub-venue { font-family: var(--display); font-style: italic; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.4rem; }
+.pub-doi { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dimmer); }
+.pub-doi a { color: rgba(201,168,76,0.5); text-decoration: none; }
+.pub-doi a:hover { color: var(--gold); }
+.pub-num { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dimmer); white-space: nowrap; }
+
+/* Abstracts section */
+.abs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 5rem; }
+.abs-card {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 2.2rem; transition: border-color 0.25s;
+}
+.abs-card:hover { border-color: rgba(201,168,76,0.35); }
+.abs-title { font-family: var(--display); font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 0.6rem; line-height: 1.35; }
+.abs-text { font-size: 0.83rem; line-height: 1.75; color: var(--text-dim); }
+.abs-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+
+/* Conferences */
+.conf-list { margin-bottom: 2rem; }
+.conf-item {
+  display: grid; grid-template-columns: 120px 1fr;
+  gap: 2rem; padding: 1.8rem 0;
+  border-bottom: 1px solid var(--border2);
+  align-items: start;
+}
+.conf-date { font-family: var(--mono); font-size: 0.65rem; color: var(--gold); letter-spacing: 0.08em; line-height: 1.5; }
+.conf-name { font-family: var(--display); font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+.conf-venue { font-size: 0.82rem; color: var(--text-dim); }
+.conf-link a { color: rgba(201,168,76,0.5); font-family: var(--mono); font-size: 0.62rem; text-decoration: none; }
+.conf-link a:hover { color: var(--gold); }
+
+@media (max-width: 960px) {
+  .res-body { padding: 4rem 2rem; }
+  .res-stats { grid-template-columns: repeat(2, 1fr); }
+  .res-stat:nth-child(2) { border-right: none; }
+  .res-stat:nth-child(1), .res-stat:nth-child(2) { border-bottom: 1px solid var(--border); }
+  .pub-card { grid-template-columns: 1fr; gap: 0.8rem; }
+  .pub-year { font-size: 2rem; text-align: left; }
+  .abs-grid { grid-template-columns: 1fr; }
+  .conf-item { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">. nadiim .</a>
+  <button class="nav-toggle" id="navToggle">&#9776;</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="research.html" class="active">Research</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header" data-title="Research">
+  <p class="ph-label">Publications &amp; Research</p>
+  <h1 class="ph-title"><em>Research</em></h1>
+  <p class="ph-sub">Heritage, Mosque Architecture, Urban Informality &amp; Riverine Culture</p>
+</div>
+
+<div class="res-body">
+
+  <div class="res-stats fade-in">
+    <div class="res-stat"><div class="res-stat-n">5</div><div class="res-stat-l">Publications</div></div>
+    <div class="res-stat"><div class="res-stat-n">3</div><div class="res-stat-l">Conferences</div></div>
+    <div class="res-stat"><div class="res-stat-n">2</div><div class="res-stat-l">Under Review</div></div>
+    <div class="res-stat"><div class="res-stat-n">4</div><div class="res-stat-l">Co-Authors</div></div>
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <div class="pub-list">
+    <p class="section-label">Publications</p>
+    <h2 class="section-title" style="margin-bottom:2.5rem;">Peer-Reviewed Work</h2>
+
+    <div class="pub-card fade-in">
+      <div class="pub-year">2026</div>
+      <div class="pub-body">
+        <span class="pub-status review">Under Review</span>
+        <div class="pub-title">Reactivating Riverine Heritage: Adaptive Reuse of the PS Lepcha as a Cultural Exchange Hub in Old Dhaka</div>
+        <div class="pub-authors">N M Shamsul Islam, Tanvir Ahmed &amp; Sadika Alam Sayma</div>
+        <div class="pub-venue">Journal of Architecture, BUET</div>
+      </div>
+      <div class="pub-num">01</div>
+    </div>
+
+    <div class="pub-card fade-in">
+      <div class="pub-year">2026</div>
+      <div class="pub-body">
+        <span class="pub-status published">Published</span>
+        <div class="pub-title">Beyond Bulldozers: Scrap Steel, Participatory Design, and In-Situ Upgrading in an Informal Dhaka Settlement</div>
+        <div class="pub-authors">N M Shamsul Islam &amp; Diptenu Saha</div>
+        <div class="pub-venue">Urban Informality: Inclusive Policy, Planning &amp; Design &mdash; Department of Architecture and Planning, IIT Roorkee, India &mdash; 9 Mar 2026</div>
+      </div>
+      <div class="pub-num">02</div>
+    </div>
+
+    <div class="pub-card fade-in">
+      <div class="pub-year">2025</div>
+      <div class="pub-body">
+        <span class="pub-status published">Published</span>
+        <div class="pub-title">Mosque Morphosis in Bangladesh: Transmutation of Forms and Openings in Dhaka's Community Mosques</div>
+        <div class="pub-authors">N M Shamsul Islam &amp; Joarder Hafiz Ullah</div>
+        <div class="pub-venue">4th International Conference on Mosque Architecture &mdash; Istanbul Technical University, Turkey &mdash; 6 Nov 2025 &mdash; ICMA_4TH_VOL2</div>
+      </div>
+      <div class="pub-num">03</div>
+    </div>
+
+    <div class="pub-card fade-in">
+      <div class="pub-year">2024</div>
+      <div class="pub-body">
+        <span class="pub-status published">Published</span>
+        <div class="pub-title">Study of Noise Level in Roadside Surgery and Medicine Ward of a Hospital in Dhaka City</div>
+        <div class="pub-authors">Farha Tanzin &amp; N M Shamsul Islam</div>
+        <div class="pub-venue">IICASD-2024 &mdash; The Atlantis Press &mdash; DUET, 9 Nov 2024</div>
+        <div class="pub-doi">DOI: <a href="https://doi.org/10.2991/978-94-6463-672-7_11" target="_blank">10.2991/978-94-6463-672-7_11</a></div>
+      </div>
+      <div class="pub-num">04</div>
+    </div>
+
+    <div class="pub-card fade-in">
+      <div class="pub-year">2024</div>
+      <div class="pub-body">
+        <span class="pub-status published">Published</span>
+        <div class="pub-title">Influence of Spirituality in Mosque: Analyze the Impact of Architectural Features on the Muslim Community, Minding the Contemporary Mosque Complexes of Dhaka</div>
+        <div class="pub-authors">N M Shamsul Islam &amp; Joarder Hafiz Ullah</div>
+        <div class="pub-venue">IICASD-2024 &mdash; Dhaka University of Engineering &amp; Technology &mdash; 9 Nov 2024</div>
+      </div>
+      <div class="pub-num">05</div>
+    </div>
+
+  </div>
+
+  <!-- ABSTRACTS -->
+  <div class="fade-in" style="margin-bottom:5rem;">
+    <p class="section-label">Research Abstracts</p>
+    <h2 class="section-title" style="margin-bottom:2.5rem;">Extended Abstracts</h2>
+    <div class="abs-grid">
+      <div class="abs-card">
+        <div class="abs-label">Riverine Heritage &mdash; On Review, Journal of Architecture BUET</div>
+        <div class="abs-title">Reactivating Riverine Heritage: Adaptive Reuse of the PS Lepcha</div>
+        <div class="abs-text">Bangladesh's paddle steamers represent a 150-year-old riverine culture. The PS Lepcha, built in 1938, is now idle on the Buriganga. This paper presents an adaptive reuse intervention transforming it into a vibrant cultural exchange hub integrating a museum of steam engines, a herbal tea lounge, meditation areas, a book cafe, art studio, and amphitheater at the jetty.</div>
+      </div>
+      <div class="abs-card">
+        <div class="abs-label">Industrial Heritage &mdash; Thesis Research</div>
+        <div class="abs-title">From Mill to Memory: Jute Legacy Revival at Adamjee</div>
+        <div class="abs-text">The last surviving shed of Adamjee Jute Mill, once the world's largest, now decays inside Narayanganj's AEPZ. The design reinvigorates 50,000 sqm through six zones: a Machine Museum, Sonali Bag Pavilion, Workers' Memorial Garden, Community Skills Courtyard, knowledge-sharing spaces, and a riverfront promenade, contributing to SDGs 8, 9, 11, and 12.</div>
+      </div>
+      <div class="abs-card">
+        <div class="abs-label">Mosque Architecture &mdash; Istanbul Conference 2025</div>
+        <div class="abs-title">Mosque Morphosis: Forms and Openings in Dhaka's Community Mosques</div>
+        <div class="abs-text">Dhaka, known as 'the City of Mosques,' has a 400-year Islamic architectural history. This study examines differences and variations in form and ventilation designs between historic and contemporary mosques, exploring how spiritual and aesthetic priorities shape community mosque architecture while remaining climate-responsive.</div>
+      </div>
+      <div class="abs-card">
+        <div class="abs-label">Informal Settlement &mdash; IIT Roorkee 2026</div>
+        <div class="abs-title">Beyond Bulldozers: Participatory Upgrading in Tejgaon Kunipara</div>
+        <div class="abs-text">An alternative to the conventional demolition approach. Through five stages including 200 family interviews, comparative case studies of Khuda Ki Basti (Karachi) and Jhawtola Sebok Colony, and iterative design with scrap steel and bamboo from nearby rolling mills, construction costs were reduced 40-60% while meeting UN-Habitat incremental housing guidelines.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFERENCES -->
+  <div class="fade-in">
+    <p class="section-label">Conferences &amp; Seminars</p>
+    <h2 class="section-title" style="margin-bottom:2.5rem;">Academic Events</h2>
+    <div class="conf-list">
+      <div class="conf-item">
+        <div class="conf-date">Nov 4-6<br>2025</div>
+        <div>
+          <div class="conf-name">4th International Conference on Mosque Architecture</div>
+          <div class="conf-venue">Istanbul Technical University, Istanbul, Turkey</div>
+          <div class="conf-link"><a href="https://icmamosques.org/" target="_blank">icmamosques.org</a></div>
+        </div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-date">Oct 31<br>2025</div>
+        <div>
+          <div class="conf-name">Seminar on Environmental Sustainability for Livable Cities: The Dhaka Context</div>
+          <div class="conf-venue">Institute of Architects Bangladesh (IAB), Dhaka &mdash; Exhibited Urban Studio Project "Threads of the City"</div>
+        </div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-date">Nov 7-9<br>2024</div>
+        <div>
+          <div class="conf-name">1st International Conference on Recent Innovation in Civil Engineering and Architecture for Sustainable Development (IICASD-2024)</div>
+          <div class="conf-venue">DUET, Gazipur &mdash; Presented two papers</div>
+          <div class="conf-link"><a href="https://iicasd.com/" target="_blank">iicasd.com</a></div>
+        </div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-date">Mar 9<br>2026</div>
+        <div>
+          <div class="conf-name">Urban Informality: Inclusive Policy, Planning &amp; Design</div>
+          <div class="conf-venue">Department of Architecture and Planning, IIT Roorkee, India &mdash; Beyond Bulldozers paper</div>
+        </div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-date">Nov 4-6<br>2025</div>
+        <div>
+          <div class="conf-name">Thesis Exhibition in DUET</div>
+          <div class="conf-venue">Dhaka University of Engineering &amp; Technology, Gazipur</div>
+        </div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-date">Mar 11<br>2024</div>
+        <div>
+          <div class="conf-name">Co-Designing Informal Settlement</div>
+          <div class="conf-venue">POCAA &mdash; DUET</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">. nadiim .</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="portfolio.html">Portfolio</a>
+    <a href="research.html">Research</a><a href="cv.html">CV</a><a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-note">N M Shamsul Islam Nadiim &mdash; Architect, DUET &mdash; Dhaka, Bangladesh</div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>

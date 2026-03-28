@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV — N M Shamsul Islam Nadiim</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.cv-body { padding: 5rem 6rem; }
+.cv-grid { display: grid; grid-template-columns: 1fr 340px; gap: 5rem; align-items: start; }
+.cv-main {}
+.cv-side {}
+
+/* Timeline */
+.timeline { position: relative; padding-left: 2rem; margin-bottom: 4rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 1px; background: var(--border);
+}
+.tl-item { position: relative; padding-left: 1.8rem; margin-bottom: 2.8rem; }
+.tl-item::before {
+  content: ''; position: absolute; left: -2rem;
+  top: 0.3rem; width: 7px; height: 7px;
+  background: var(--gold); border-radius: 50%;
+  transform: translateX(-3px);
+  box-shadow: 0 0 8px rgba(201,168,76,0.5);
+}
+.tl-period {
+  font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.3rem;
+}
+.tl-role {
+  font-family: var(--display); font-size: 1.2rem;
+  font-weight: 600; color: var(--text); margin-bottom: 0.15rem;
+}
+.tl-org { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 0.7rem; }
+.tl-org a { color: rgba(201,168,76,0.6); text-decoration: none; }
+.tl-org a:hover { color: var(--gold); }
+.tl-points { list-style: none; }
+.tl-points li {
+  font-size: 0.83rem; line-height: 1.7; color: var(--text-dim);
+  padding-left: 1rem; position: relative; margin-bottom: 0.25rem;
+}
+.tl-points li::before { content: '/'; position: absolute; left: 0; color: var(--gold); font-family: var(--mono); }
+
+/* Education cards */
+.edu-cards { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 4rem; }
+.edu-card {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1.8rem 2rem; position: relative; overflow: hidden;
+}
+.edu-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.edu-degree { font-family: var(--display); font-size: 1.15rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
+.edu-inst { font-size: 0.85rem; color: var(--gold); margin-bottom: 0.2rem; }
+.edu-period { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+.edu-grade {
+  display: inline-block; background: var(--gold-dim);
+  border: 1px solid rgba(201,168,76,0.2);
+  color: var(--gold); font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.08em; padding: 0.22rem 0.7rem; margin-right: 0.5rem; margin-bottom: 0.5rem;
+}
+.edu-thesis { font-family: var(--display); font-style: italic; font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+
+/* Side awards/certs */
+.side-block { margin-bottom: 3rem; }
+.side-title { font-family: var(--display); font-size: 1.3rem; font-weight: 600; color: var(--text); margin-bottom: 1.5rem; }
+.award-item {
+  padding: 1.2rem 0; border-bottom: 1px solid var(--border2);
+  display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start;
+}
+.award-year-badge {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.08em;
+  color: var(--gold); background: var(--gold-dim);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 0.2rem 0.5rem; white-space: nowrap;
+  align-self: start; margin-top: 0.1rem;
+}
+.award-name { font-size: 0.83rem; color: var(--text); margin-bottom: 0.15rem; line-height: 1.4; }
+.award-org-small { font-size: 0.75rem; color: var(--text-dim); }
+
+.cert-item {
+  padding: 0.9rem 0; border-bottom: 1px solid var(--border2);
+  display: flex; align-items: start; gap: 0.8rem;
+}
+.cert-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 0.35rem; }
+.cert-name { font-size: 0.82rem; color: var(--text); margin-bottom: 0.1rem; }
+.cert-iss { font-family: var(--mono); font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.04em; }
+
+.vol-item { padding: 1rem 0; border-bottom: 1px solid var(--border2); }
+.vol-role { font-size: 0.85rem; font-weight: 400; color: var(--text); margin-bottom: 0.15rem; }
+.vol-org { font-size: 0.8rem; color: var(--text-dim); }
+.vol-period { font-family: var(--mono); font-size: 0.6rem; color: var(--gold); margin-bottom: 0.2rem; letter-spacing: 0.06em; }
+
+@media (max-width: 960px) {
+  .cv-body { padding: 4rem 2rem; }
+  .cv-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">. nadiim .</a>
+  <button class="nav-toggle" id="navToggle">&#9776;</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="cv.html" class="active">CV</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header" data-title="CV">
+  <p class="ph-label">Curriculum Vitae</p>
+  <h1 class="ph-title">Full <em>CV</em></h1>
+  <p class="ph-sub">Experience &middot; Education &middot; Awards &middot; Certifications &middot; Volunteering</p>
+</div>
+
+<div class="cv-body">
+<div class="cv-grid">
+
+  <!-- LEFT: main -->
+  <div class="cv-main">
+
+    <!-- EXPERIENCE -->
+    <p class="section-label" style="margin-bottom:0.5rem;">Experience</p>
+    <h2 class="section-title" style="margin-bottom:2.5rem;">Work History</h2>
+    <div class="timeline fade-in">
+
+      <div class="tl-item">
+        <div class="tl-period">Jan 2026 — Present</div>
+        <div class="tl-role">Assistant Architect</div>
+        <div class="tl-org"><a href="https://www.facebook.com/perceive.rd" target="_blank">Perceive</a> &mdash; Dhaka, Bangladesh</div>
+        <ul class="tl-points">
+          <li>Running a Vulture Conservation Project in partnership with IUCN</li>
+          <li>Spatial analysis and site assessment in rural and conservation contexts</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">Oct 2023 — Dec 2023</div>
+        <div class="tl-role">Intern Architect / Research Assistant</div>
+        <div class="tl-org"><a href="https://www.facebook.com/perceive.rd" target="_blank">Perceive</a> &mdash; Dhaka, Bangladesh</div>
+        <ul class="tl-points">
+          <li>Research on rural and peri-urban spatial phenomena including site analysis and documentation</li>
+          <li>Data collection and mapping for Haripur Zamindar Bari</li>
+          <li>Organized the MATIYAL Earthen Architecture Workshop</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">Jan 2019 — Mar 2019</div>
+        <div class="tl-role">Junior Architect</div>
+        <div class="tl-org"><a href="https://www.facebook.com/circleinteriorltd" target="_blank">Circle Interior Limited</a> &mdash; Dhaka, Bangladesh</div>
+        <ul class="tl-points">
+          <li>Interior space planning and layout design for 17+ projects (residential, office, retail) for Flora Limited, Toma Group, Mbrella, Sailor etc.</li>
+          <li>Material selection, detailed working drawings, AutoCAD, SketchUp, Lumion, Photoshop</li>
+          <li>BOQs, specifications, timelines, site coordination</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">Apr 2018 — Dec 2018</div>
+        <div class="tl-role">Architectural Visualizer</div>
+        <div class="tl-org"><a href="https://www.facebook.com/obliquead" target="_blank">Oblique Architectural Design</a> &mdash; Dhaka, Bangladesh</div>
+        <ul class="tl-points">
+          <li>Photorealistic 3D renderings and visualizations for 21+ residential and commercial projects</li>
+          <li>Collaborative 3D modelling and iterative rendering with architecture teams</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">Aug 2017 — Oct 2017</div>
+        <div class="tl-role">Industrial Attachment</div>
+        <div class="tl-org">ENTECH Engineering &amp; Architectural Ltd. &mdash; Gazipur, Bangladesh</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-period">Jun 2024 — Jul 2024</div>
+        <div class="tl-role">Master Model Project</div>
+        <div class="tl-org">Alliance with SHELTECH Consultants Private Limited</div>
+        <ul class="tl-points">
+          <li>Master Model of the Future Extension of Gazipur Agriculture University</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- EDUCATION -->
+    <p class="section-label" style="margin-bottom:0.5rem;">Education</p>
+    <h2 class="section-title" style="margin-bottom:2rem;">Academic Background</h2>
+    <div class="edu-cards fade-in">
+      <div class="edu-card">
+        <div class="edu-degree">Bachelor of Architecture</div>
+        <div class="edu-inst">Dhaka University of Engineering &amp; Technology (DUET)</div>
+        <div class="edu-period">Jan 2020 — Feb 2026 (Expected) &middot; Gazipur, Bangladesh</div>
+        <div>
+          <span class="edu-grade">CGPA 3.75 / 4.00</span>
+          <span class="edu-grade">1st in Batch</span>
+          <span class="edu-grade">EQF Level 6</span>
+        </div>
+        <div class="edu-thesis">Thesis: The Golden Fiber Tales: Embracing the Legacy of Jute from the Heritage of Adamjee Jute Mill</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">Diploma in Architecture</div>
+        <div class="edu-inst">Dhaka Polytechnic Institute (DPI)</div>
+        <div class="edu-period">Jan 2014 — Mar 2018 &middot; Dhaka, Bangladesh</div>
+        <div>
+          <span class="edu-grade">CGPA 3.45 / 4.00</span>
+          <span class="edu-grade">4th in Batch</span>
+          <span class="edu-grade">EQF Level 5</span>
+        </div>
+        <div class="edu-thesis">Architectural drafting, technical drawing, site surveying, project documentation, building materials and construction methods</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: side -->
+  <div class="cv-side">
+
+    <!-- HONOURS -->
+    <div class="side-block fade-in">
+      <div class="side-title">Honours &amp; Awards</div>
+      <div class="award-item">
+        <span class="award-year-badge">2025</span>
+        <div><div class="award-name">Excellence in Community Impact</div><div class="award-org-small">Claymire &amp; Placemaking Bangladesh</div></div>
+      </div>
+      <div class="award-item">
+        <span class="award-year-badge">2025</span>
+        <div><div class="award-name">Dean's Award &mdash; 4th Year</div><div class="award-org-small">DUET</div></div>
+      </div>
+      <div class="award-item">
+        <span class="award-year-badge">2026</span>
+        <div><div class="award-name">Dean's Award &mdash; 5th Year</div><div class="award-org-small">DUET (pending)</div></div>
+      </div>
+      <div class="award-item">
+        <span class="award-year-badge">2024</span>
+        <div><div class="award-name">1st Runner Up, Drafting Contest</div><div class="award-org-small">CENNOVATION 2024 &mdash; IUT</div></div>
+      </div>
+      <div class="award-item">
+        <span class="award-year-badge">2023</span>
+        <div><div class="award-name">Champion, Perspective Illustration</div><div class="award-org-small">CENNOVATION 2023 &mdash; IUT</div></div>
+      </div>
+      <div class="award-item">
+        <span class="award-year-badge">2023</span>
+        <div><div class="award-name">1st Runner Up, Drafting Contest</div><div class="award-org-small">CENNOVATION 2023 &mdash; IUT</div></div>
+      </div>
+      <div class="award-item">
+        <span class="award-year-badge">2020-26</span>
+        <div><div class="award-name">Undergraduate Merit Scholarship</div><div class="award-org-small">DUET &mdash; 9 consecutive semesters (1st position)</div></div>
+      </div>
+      <div class="award-item">
+        <span class="award-year-badge">2021-26</span>
+        <div><div class="award-name">Class Representative Certificate</div><div class="award-org-small">DUET CR Forum</div></div>
+      </div>
+    </div>
+
+    <!-- VOLUNTEERING -->
+    <div class="side-block fade-in">
+      <div class="side-title">Volunteering</div>
+      <div class="vol-item">
+        <div class="vol-period">Nov 2021 — Feb 2026</div>
+        <div class="vol-role">Batch Representative</div>
+        <div class="vol-org">Dept. of Architecture, DUET</div>
+      </div>
+      <div class="vol-item">
+        <div class="vol-period">Oct 2023 (and 2025)</div>
+        <div class="vol-role">World Heritage Volunteering Program</div>
+        <div class="vol-org">UNESCO &amp; ICOMOS Bangladesh &mdash; Buddhist Vihara at Paharpur</div>
+      </div>
+      <div class="vol-item">
+        <div class="vol-period">Dec 2023</div>
+        <div class="vol-role">Earthen Architecture Workshop &mdash; MATIYAL</div>
+        <div class="vol-org">Pathra, Jhenaidah</div>
+      </div>
+      <div class="vol-item">
+        <div class="vol-period">Aug 2024</div>
+        <div class="vol-role">Feni Flood Relief 2024</div>
+        <div class="vol-org">DUET Students &mdash; 30 lakh BDT managed, aid to hundreds of families</div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="side-block fade-in">
+      <div class="side-title">Certifications</div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">AI for Daily Office Productivity</div><div class="cert-iss">Academy of Open Learning &mdash; Mar 2025</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Career Essentials in Generative AI</div><div class="cert-iss">Microsoft &amp; LinkedIn &mdash; Jul 2024</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Fundamentals of Manuscript Preparation</div><div class="cert-iss">Researcher Academy &mdash; Jun 2024 (Certificate of Excellence)</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Research Integrity</div><div class="cert-iss">Springer Nature &mdash; Jun 2024</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Terracotta Workshop</div><div class="cert-iss">Dec 2025</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Parametric Modeling in Rhino &amp; Grasshopper</div><div class="cert-iss">Aug 2023</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Eternal Voices Competition &mdash; National Monument</div><div class="cert-iss">ArchDune &mdash; Dec 2024</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Wearix Poster Presentation Competition</div><div class="cert-iss">Rajshahi University Education Club &mdash; Dec 2024</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Making Architecture</div><div class="cert-iss">IE School of Architecture &amp; Design &mdash; Apr 2020</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">AutoCAD 2D</div><div class="cert-iss">Composition Training Center &mdash; Feb 2016</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Future of AI + Why Research Is Important</div><div class="cert-iss">Bangladesh Innovation Forum &mdash; Aug 2020</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Cevilization &mdash; Drafting Derby</div><div class="cert-iss">ASCE Student Chapter, DUET &mdash; May 2024</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Environment Olympiad 2024</div><div class="cert-iss">Brikkhobondhu &mdash; Apr 2024</div></div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Co-Designing Informal Settlement</div><div class="cert-iss">DUET &mdash; Mar 2024</div></div></div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<footer>
+  <div class="footer-logo">. nadiim .</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="portfolio.html">Portfolio</a>
+    <a href="research.html">Research</a><a href="cv.html">CV</a><a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-note">N M Shamsul Islam Nadiim &mdash; Architect, DUET &mdash; Dhaka, Bangladesh</div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>
